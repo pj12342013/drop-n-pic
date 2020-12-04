@@ -1,0 +1,160 @@
+
+nav .navbar-brand
+{
+    /* size for brand */
+    font-size: xx-large;
+    
+    /* google fonts */
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* colors for brand */
+nav .navbar-brand .blue
+{
+    color: #537fbe;
+}
+nav .navbar-brand .red
+{
+    color: #ea433b;
+}
+nav .navbar-brand .yellow
+{
+    color: #f5b82e;
+}
+nav .navbar-brand .green
+{
+    color: #2e944b;
+}
+
+main .form-control
+{
+    /* center form controls */
+    display: inline-block;
+
+    /* override Bootstrap's 100% width for form controls */
+    width: auto;
+}
+
+main
+{
+    /* scroll horizontally as needed */
+    overflow-x: auto;
+
+    /* center contents */
+    text-align: center;
+
+    /* google fonts */
+    font-family: 'Open Sans', sans-serif;
+}
+
+
+body {
+    /* google fonts */
+    font-family: 'Open Sans', sans-serif;
+}
+
+main img
+{
+    /* constrain images on small screens */
+    max-width: 100%;
+}
+
+/* new css 4th dec */
+
+#photos {
+    /* Prevent vertical gaps */
+    line-height: 0;
+     
+    -webkit-column-count: 5;
+    -webkit-column-gap:   0px;
+    -moz-column-count:    5;
+    -moz-column-gap:      0px;
+    column-count:         5;
+    column-gap:           0px;  
+  }
+
+#photos img {
+    /* Just in case there are inline attributes */
+    width: 100% !important;
+    height: auto !important;
+  }
+
+
+
+  @media (max-width: 1200px) {
+    #photos {
+    -moz-column-count:    4;
+    -webkit-column-count: 4;
+    column-count:         4;
+    }
+  }
+  @media (max-width: 1000px) {
+    #photos {
+    -moz-column-count:    3;
+    -webkit-column-count: 3;
+    column-count:         3;
+    }
+  }
+  @media (max-width: 800px) {
+    #photos {
+    -moz-column-count:    2;
+    -webkit-column-count: 2;
+    column-count:         2;
+    }
+  }
+  @media (max-width: 400px) {
+    #photos {
+    -moz-column-count:    1;
+    -webkit-column-count: 1;
+    column-count:         1;
+    }
+  }
+
+
+  /* button overlay css */
+
+  .img-wrapper {
+    position: relative;
+   }
+
+   img{
+    transition:transform 0.25s ease;
+   }
+
+   img:hover{
+    -webkit-transform:scale(2.5); /* or some other value */
+    transform:scale(1.5);
+   }
+
+   .img-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+  
+
+  .img-overlay:before {
+    content: ' ';
+    display: block;
+    /* adjust 'height' to position overlay content vertically */
+    height: 75%;
+  }
+
+  
+  
+
+
+  
+
+ 
+
+
+
+
+
+
+
+

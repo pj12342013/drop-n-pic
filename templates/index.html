@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+{% block main %}
+<section id="photos">
+    {%for a in uploads%} 
+    <img src="{{ url_for('static', filename=a['filename'])}}" alt="user image" width="320" height="240">
+    {%endfor%}
+</section>
+{% endblock %}

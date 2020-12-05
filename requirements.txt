@@ -29,7 +29,7 @@ Pillow==8.0.1
 prompt-toolkit==3.0.8
 Pygments==2.7.1
 pylint==2.6.0
-pywin32==228
+#pywin32==228
 pyzmq==19.0.2
 requests==2.25.0
 six==1.15.0

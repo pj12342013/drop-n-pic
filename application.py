@@ -21,7 +21,7 @@ app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 #max size of file is 100mb(1024 * 1024 is 1 mb)
-app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024
+app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
 
 # Ensure responses aren't cached
 @app.after_request

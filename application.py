@@ -38,7 +38,7 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 #picfolder = os.path.join('static', 'data')
 #picfolder = r'workspace\final_project\final_project\static'
-picfolder = r'D:\cloud_storage_project\final_project\static'
+picfolder = r'final_project\static'
 app.config["UPLOAD_FOLDER"] = picfolder
 Session(app)
 

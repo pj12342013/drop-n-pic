@@ -36,8 +36,8 @@ def after_request(response):
 
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-
-app.config["UPLOAD_FOLDER"] = './static'
+picfolder = './static'
+app.config["UPLOAD_FOLDER"] = picfolder
 
 Session(app)
 
@@ -95,7 +95,8 @@ def upload_file():
                 unique_filename = make_unique(secure_filename(f.filename))
                 secure_filename(f.filename)
                 f.save(os.path.join(app.config['UPLOAD_FOLDER'], unique_filename))
-                db.execute("INSERT INTO 'upload_list'('user_id', 'filename', 'type') VALUES(:u, :f, 'image')", u=session['user_id'], f=unique_filename)
+                #error starts here, removed string elements
+                db.execute("INSERT INTO upload_list(user_id, filename, type) VALUES(:u, :f, 'image')", u=session['user_id'], f=unique_filename)
                 return render_template("index.html")
 
         elif f and allowed_video_file(f.filename):

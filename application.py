@@ -48,7 +48,7 @@ ALLOWED_EXTENSIONS_VIDEO = { 'mp4', 'avi', 'mov', 'flv', 'wmv' }
 app.config['UPLOAD_EXTENSIONS'] = ['raw', 'png', 'jpg', 'jpeg', 'gif', 'bmp', 'mp4', 'avi', 'mov', 'flv', 'wmv']
 
 # Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///final.db")
+db = SQL("postgres://mljkipkxgmbwmf:a0d724a1d058cc67169a1e6fdadb5b2ad5713141bbc24a8ad8c27d153356a009@ec2-3-95-124-37.compute-1.amazonaws.com:5432/dachbi999edt06")
 
 @app.route("/")
 @login_required

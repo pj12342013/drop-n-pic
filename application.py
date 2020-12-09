@@ -21,7 +21,7 @@ app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 
 #max size of file is 100mb(1024 * 1024 is 1 mb)
-app.config['MAX_CONTENT_LENGTH'] = 10 * 1024 * 1024
+app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024
 
 # Ensure responses aren't cached
 @app.after_request
@@ -33,18 +33,17 @@ def after_request(response):
 
 
 # Configure session to use filesystem (instead of signed cookies)
-app.config["SESSION_FILE_DIR"] = mkdtemp()
+
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
-#picfolder = os.path.join('static', 'data')
-#picfolder = r'workspace\final_project\final_project\static'
-picfolder = r'final_project\static'
-app.config["UPLOAD_FOLDER"] = picfolder
+
+app.config["UPLOAD_FOLDER"] = './static'
+
 Session(app)
 
 ALLOWED_EXTENSIONS = {'raw', 'png', 'jpg', 'jpeg', 'gif', 'bmp'}
 
-ALLOWED_EXTENSIONS_VIDEO = { 'mp4', 'avi', 'mov', 'flv', 'wmv' } 
+ALLOWED_EXTENSIONS_VIDEO = { 'mp4', 'avi', 'mov', 'flv', 'wmv' }
 
 app.config['UPLOAD_EXTENSIONS'] = ['raw', 'png', 'jpg', 'jpeg', 'gif', 'bmp', 'mp4', 'avi', 'mov', 'flv', 'wmv']
 
@@ -54,7 +53,7 @@ db = SQL("sqlite:///final.db")
 @app.route("/")
 @login_required
 def index():
-    """Show portfolio of stocks"""
+    """Show portfolio of photos"""
     uploads = db.execute("SELECT * FROM upload_list WHERE user_id=:u AND type='image'", u=session['user_id'])
     return render_template("index.html", uploads=uploads)
 
@@ -70,13 +69,13 @@ def account():
 
 @app.route("/video")
 @login_required
-def video(): 
+def video():
     uploads = db.execute("SELECT * FROM upload_list WHERE user_id=:u AND type='video'", u=session['user_id'])
-    return render_template("video.html", uploads=uploads)    
+    return render_template("video.html", uploads=uploads)
 
 @app.route("/upload", methods=["GET", "POST"])
 @login_required
-def upload(): 
+def upload():
     return render_template("upload.html")
 
 def allowed_image_file(filename):
@@ -98,38 +97,38 @@ def upload_file():
                 f.save(os.path.join(app.config['UPLOAD_FOLDER'], unique_filename))
                 db.execute("INSERT INTO 'upload_list'('user_id', 'filename', 'type') VALUES(:u, :f, 'image')", u=session['user_id'], f=unique_filename)
                 return render_template("index.html")
-                                       
-        elif f and allowed_video_file(f.filename): 
-                try: 
+
+        elif f and allowed_video_file(f.filename):
+                try:
                     unique_filename = make_unique(secure_filename(f.filename))
                     secure_filename(f.filename)
                     f.save(os.path.join(app.config['UPLOAD_FOLDER'], unique_filename))
                     db.execute("INSERT INTO 'upload_list'('user_id', 'filename', 'type') VALUES(:u, :f, 'video')", u=session['user_id'], f=unique_filename)
                     return render_template("index.html")
-                
-                except FileNotFoundError: 
+
+                except FileNotFoundError:
                     flash("No file found")
-                    return render_template("upload.html")  
-        
+                    return render_template("upload.html")
+
         if f.filename != '':
             file_ext = os.path.splitext(f.filename)[1]
             if file_ext not in app.config['UPLOAD_EXTENSIONS']:
                 return "Invalid File", 400
 
-        
+
         else:
             flash("Only image and video files allowed")
-            return render_template("upload.html")         
+            return render_template("upload.html")
 
 @app.route("/pictures")
 @login_required
 def pictures():
     uploads = db.execute("SELECT * FROM upload_list WHERE user_id=:u AND type='image'", u=session['user_id'])
     return render_template("pictures.html", uploads=uploads)
-        
+
 @app.route('/return-files/<filename>')
 def return_files_tut(filename):
-    file_path = app.config['UPLOAD_FOLDER']+'\\' + filename
+    file_path = app.config['UPLOAD_FOLDER'] + '/' +filename
     return send_file(file_path, as_attachment=True, attachment_filename='')
 
 @app.route('/delete-files/<filename>')
@@ -279,6 +278,11 @@ def errorhandler(e):
 # Listen for errors
 for code in default_exceptions:
     app.errorhandler(code)(errorhandler)
+
+
+
+
+
 
 
 
